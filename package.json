@@ -1,7 +1,7 @@
 {
     "name": "auto-sass",
     "main": "./index.js",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Takes a Sass file on each save and automatically compiles, lints, prefixes, and saves the resulting CSS code.",
     "keywords": [ "sass", "scss", "css", "compile", "atom", "stylesheet" ],
     "repository": "https://github.com/nlydv/auto-sass",

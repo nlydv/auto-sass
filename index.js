@@ -55,13 +55,13 @@ module.exports = {
         stylelintConfigPath: {
             type: "string",
             title: "Stylelint config path",
-            description: "Absolute path to the default `.stylelintrc` config to use when linting.",
+            description: "Absolute path to a fallback `.stylelintrc` config to use when linting.",
             default: "./stylelintrc"
         },
         relativePath: {
             type: "string",
             title: "Relative output path",
-            description: "Where all compiled CSS files will be saved by default. Use `$1` in place of the original name (w/o ext.)",
+            description: "Where all compiled CSS files will be saved by default relative to source Sass file.\nUse `$1` in place of the original name (w/o ext.)",
             default: "../$1.css"
         },
         sass: {
@@ -70,7 +70,7 @@ module.exports = {
                 outputStyle: {
                     type: "string",
                     title: "Output style type",
-                    description: "Only two choices.",
+                    description: "Sass' options for how to style output CSS structure",
                     default: "expanded",
                     enum: [
                         { value: "expanded", description: "expanded" },
@@ -80,7 +80,7 @@ module.exports = {
                 sourceMap: {
                     type: "boolean",
                     title: "Source map",
-                    description: "you need map?",
+                    description: "Whether or not Sass should generate source map",
                     default: false
                 }
             }
