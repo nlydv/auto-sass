@@ -1,0 +1,7 @@
+// out: css/$1.css
+
+@import "modules/partial";
+
+article {
+    background-color: $sassy-var;
+}

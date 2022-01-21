@@ -1,0 +1,25 @@
+{
+    "name": "auto-sass",
+    "main": "./index.js",
+    "version": "1.0.0",
+    "description": "Takes a Sass file on each save and automatically compiles, lints, prefixes, and saves the resulting CSS code.",
+    "keywords": [ "sass", "scss", "css", "compile", "atom", "stylesheet" ],
+    "repository": "https://github.com/nlydv/auto-sass",
+    "license": "MIT",
+    "engines": {
+        "atom": ">=1.0.0 <2.0.0"
+    },
+    "dependencies": {
+        "autoprefixer": "^10.4.2",
+        "firstline": "^2.0.2",
+        "postcss": "^8.4.5",
+        "postcss-combine-duplicated-selectors": "^10.0.3",
+        "postcss-less": "^6.0.0",
+        "sass": "^1.49.0",
+        "shelljs": "^0.8.5",
+        "stylelint": "^14.2.0",
+        "stylelint-config-recommended": "^6.0.0",
+        "stylelint-config-standard": "^24.0.0",
+        "stylelint-config-standard-scss": "^3.0.0"
+    }
+}

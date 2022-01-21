@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Compile Sass Manually",
+        "command": "auto-sass:compile"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "Auto Sass",
+          "submenu": [
+            {
+              "label": "Compile",
+              "command": "auto-sass:compile"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

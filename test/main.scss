@@ -1,0 +1,30 @@
+// compile: css/$1.css
+
+// Silent comment
+/*
+ * Loud
+ * Comment
+ *
+ */
+
+$font: 16px;
+
+%styles {
+    color: black;
+    background: white;
+}
+
+:root {
+    font-size: $font;
+}
+
+html {
+    @extend %styles;
+    font-size: $font;
+}
+
+html {
+    font-size: 16px;
+    font-size: 1rem;
+    font-size: 1em;
+}
