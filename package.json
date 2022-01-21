@@ -1,13 +1,29 @@
 {
     "name": "auto-sass",
-    "main": "./index.js",
     "version": "1.0.1",
-    "description": "Takes a Sass file on each save and automatically compiles, lints, prefixes, and saves the resulting CSS code.",
-    "keywords": [ "sass", "scss", "css", "compile", "atom", "stylesheet" ],
-    "repository": "https://github.com/nlydv/auto-sass",
+    "description": "Atom package to manage automatic Sass file compilation and extra things.",
+    "keywords": [
+        "sass",
+        "scss",
+        "css",
+        "dart-sass",
+        "compiler",
+        "build",
+        "live",
+        "stylsheet"
+    ],
+    "homepage": "https://github.com/nlydv/auto-sass",
+    "bugs": "https://github.com/nlydv/auto-sass/issues",
     "license": "MIT",
-    "engines": {
-        "atom": ">=1.0.0 <2.0.0"
+    "author": {
+        "name": "Neel Yadav",
+        "email": "mail@neelyadav.com",
+        "url": "https://neelyadav.com/"
+    },
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nlydv/auto-sass.git"
     },
     "dependencies": {
         "autoprefixer": "^10.4.2",
@@ -16,10 +32,11 @@
         "postcss-combine-duplicated-selectors": "^10.0.3",
         "postcss-less": "^6.0.0",
         "sass": "^1.49.0",
-        "shelljs": "^0.8.5",
         "stylelint": "^14.2.0",
         "stylelint-config-recommended": "^6.0.0",
-        "stylelint-config-standard": "^24.0.0",
-        "stylelint-config-standard-scss": "^3.0.0"
+        "stylelint-config-standard": "^24.0.0"
+    },
+    "engines": {
+        "atom": ">=1.0.0 <2.0.0"
     }
 }
