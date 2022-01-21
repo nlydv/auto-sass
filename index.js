@@ -38,29 +38,10 @@ module.exports = {
     activeFile: () => atom.textEditors.getActiveTextEditor().buffer.file.path,
     config: {
         lint: {
-            type: "object",
+            type: "boolean",
             title: "Stylelint",
             description: "Run the compiled CSS through [Stylelint](https://stylelint.io/) to automatically adjust output style, where possible, to match preferred coding syntax/guidelines.",
-            properties: {
-                enabled: {
-                    type: "boolean",
-                    title: "Enabled",
-                    description: "When enabled, Auto Sass will use the first `.stylelintrc*` config file found while recursively searching each parent folder up from the source file path. If none are found, and a fallback filepath is set below, that config will used instead.",
-                    default: true
-                },
-                fallback: {
-                    type: "string",
-                    title: "Fallback config",
-                    description: "Absolute path to a fallback `.stylelintrc*` config to use when linting.",
-                    default: ""
-                },
-                standard: {
-                    type: "boolean",
-                    title: "Use `stylelint-config-standard` as last resort?",
-                    description: "If, for whatever reason, no `.stylelintrc*` configs could be discovered at all and this option is enabled, the compiled CSS will still get linted and fixed using the default standard ruleset. If this option is enabled, and no other rulesets could be found, no linting will occur.",
-                    default: true
-                }
-            }
+            default: true
         },
         prefix: {
             type: "boolean",
@@ -79,6 +60,25 @@ module.exports = {
             title: "Relative output path",
             description: "Path where all compiled CSS files will be saved by default relative to source Sass file.\nAdd a `$1` in this path where you want to dynamically re-use the name of the source file without its extension.",
             default: "../$1.css"
+        },
+        stylelint: {
+            type: "object",
+            title: "Stylelint",
+            description: "Auto Sass will use the first `.stylelintrc*` config file found while recursively searching each parent folder up from the source file path. If none are found, and a fallback filepath is set below, that config will used instead.",
+            properties: {
+                fallback: {
+                    type: "string",
+                    title: "Fallback config",
+                    description: "Absolute path to a fallback `.stylelintrc*` config to use when linting.",
+                    default: ""
+                },
+                standard: {
+                    type: "boolean",
+                    title: "Use `stylelint-config-standard` as last resort?",
+                    description: "If, for whatever reason, no `.stylelintrc*` configs could be discovered at all and this option is enabled, the compiled CSS will still get linted and fixed using the default standard ruleset. If this option is enabled, and no other rulesets could be found, no linting will occur.",
+                    default: true
+                }
+            }
         },
         sass: {
             type: "object",

@@ -31,6 +31,7 @@
         "postcss": "^8.4.5",
         "postcss-combine-duplicated-selectors": "^10.0.3",
         "postcss-less": "^6.0.0",
+        "postcss-scss": "^4.0.3",
         "sass": "^1.49.0",
         "stylelint": "^14.2.0",
         "stylelint-config-recommended": "^6.0.0",
