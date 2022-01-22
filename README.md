@@ -20,11 +20,13 @@ Motivation to publicize and provide this brief explainer is mostly to make it ea
 
 ### Install
 
-This is the first Atom package I've created, haven't looked into how the package registry works and since it's mostly for my own use, probably won't bother.
+This is the first Atom package I've created, ~~haven't looked into how the package registry works and since it's mostly for my own use, probably won't bother~~. Publishing to the registry was pretty simple.
 
-It can still be installed with Atom's CLI:
+Search for `auto-sass` and install from Atom's in-app settings UI
+
+If you prefer via CLI:
 ```bash
-apm install nlydv/auto-sass
+apm install auto-sass
 ```
 
 ### Configuration
