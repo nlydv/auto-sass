@@ -74,7 +74,7 @@ module.exports = {
                 },
                 standard: {
                     type: "boolean",
-                    title: "Use `stylelint-config-standard` as last resort?",
+                    title: "Use stylelint-config-standard as last resort?",
                     description: "If, for whatever reason, no `.stylelintrc*` configs could be discovered at all and this option is enabled, the compiled CSS will still get linted and fixed using the default standard ruleset. If this option is enabled, and no other rulesets could be found, no linting will occur.",
                     default: true
                 }
