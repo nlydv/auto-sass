@@ -1,8 +1,17 @@
 {
     "name": "auto-sass",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Atom package to manage automatic Sass file compilation and extra things.",
-    "keywords": [ "sass", "scss", "css", "dart-sass", "compiler", "build", "live", "stylesheet" ],
+    "keywords": [
+        "sass",
+        "scss",
+        "css",
+        "dart-sass",
+        "compiler",
+        "build",
+        "live",
+        "stylesheet"
+    ],
     "homepage": "https://github.com/nlydv/auto-sass",
     "bugs": "https://github.com/nlydv/auto-sass/issues",
     "license": "MIT",
