@@ -1,12 +1,19 @@
 // links: ../downstream.scss, ../main.scss
 
+/* The .stylelint rule I use wants hex colors in all uppercase and
+ * use the full 6-char format instead of the 3-char shorthand ...
+ * which should get fixed in the final CSS output and, if enabled,
+ * also be fixed in this source SCSS on compile as well.
+ */
+
 $sassy-var: pink;
+$white: #fff;
 
 html {
     color: black;
-    background-color: white;
+    background-color: $white;
 }
 
 article {
-    color: white;
+    color: #ffffff;
 }
