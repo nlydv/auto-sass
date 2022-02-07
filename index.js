@@ -2,12 +2,14 @@
  * Copyright © 2022 Neel Yadav
  * MIT License
  *
- * Name:      Auto Sass
- * Desc:      Plugin for Atom IDE for automatic Sass file compilation and extra things
+ *     Plugin for the Atom IDE to allow automatic Sass
+ *     source file compilation execution upon save and
+ *     also optionally apply additional build steps on
+ *     resulting CSS before finally outputing to file.
  *
- * Author:    Neel Yadav (@nlydv)
- * Website:   https://github.com/nlydv/auto-sass
- * License:   https://github.com/nlydv/auto-sass/blob/master/LICENSE.txt
+ * Authors:    Neel Yadav <mail@neelyadav.com>
+ * Created:    January 20th, 2022
+ * Website:    https://github.com/nlydv/auto-sass
  *
  */
 
@@ -39,43 +41,54 @@ module.exports = {
     config: {
         lint: {
             type: "boolean",
-            title: "Stylelint",
-            description: "Run the compiled CSS through [Stylelint](https://stylelint.io/) to automatically adjust output style, where possible, to match preferred coding syntax/guidelines.",
-            default: true
+            title: "Stylelint Fix",
+            description: "Run the compiled CSS through [Stylelint](https://stylelint.io/) to automatically fix output formatting to match preferred coding syntax/guidelines, where possible.",
+            default: true,
+            order: 1
         },
         prefix: {
             type: "boolean",
             title: "Autoprefix",
-            description: "Apply vendor-specific prefixes to necessary properties in compile CSS for greater cross-browser consistency. Uses Autoprefixer's built-in default comaptibility metric *(supporting ~95% of users)*.",
-            default: true
+            description: "Run [Autoprefixer](https://github.com/postcss/autoprefixer) on compiled CSS to apply vendor-specific prefixes for greater cross-browser consistency.",
+            default: true,
+            order: 2
         },
         dedupe: {
             type: "boolean",
             title: "Deduplicate",
             description: "Merges multiple exact-match selector blocks into one and deletes repeated property-value pairs in compiled CSS *(use with caution for now)*.",
-            default: false
+            default: false,
+            order: 3
         },
         relativePath: {
             type: "string",
             title: "Relative output path",
             description: "Path where all compiled CSS files will be saved by default relative to source Sass file.\nAdd a `$1` in this path where you want to dynamically re-use the name of the source file without its extension.",
-            default: "../$1.css"
+            default: "../$1.css",
+            order: 4
+        },
+        browserlist: {
+            type: "string",
+            title: "Browserlist query fallback",
+            description: "We let Autoprefixer automatically discover a Browserlist config object as either a key within a nearby package.json or dedicated .browserlistrc file. If none are found, and you don't want Autoprefixer to use the default Browserlist query set, you can set a custom Browserlist query here.",
+            default: "",
+            order: 5
         },
         stylelint: {
             type: "object",
-            title: "Stylelint",
-            description: "Auto Sass will use the first `.stylelintrc*` config file found while recursively searching each parent folder up from the source file path. If none are found, and a fallback filepath is set below, that config will used instead.",
+            title: "Stylelint Options",
+            order: 6,
             properties: {
                 fallback: {
                     type: "string",
                     title: "Fallback config",
-                    description: "Absolute path to a fallback `.stylelintrc*` config to use when linting.",
+                    description: "**Auto Sass** will use the first `.stylelintrc` config file found while recursively searching each parent folder up from the source file path. If none are found, and an absolute path to a fallback `.stylelintrc` file is set here, that config will be used instead.",
                     default: ""
                 },
                 standard: {
                     type: "boolean",
-                    title: "Use stylelint-config-standard as last resort?",
-                    description: "If, for whatever reason, no `.stylelintrc*` configs could be discovered at all and this option is enabled, the compiled CSS will still get linted and fixed using the default standard ruleset. If this option is enabled, and no other rulesets could be found, no linting will occur.",
+                    title: "Use stylelint-config-standard",
+                    description: "If for whatever reason, no `.stylelintrc` configs could be discovered at all, the compiled CSS will still get linted and fixed using the default standard ruleset, unless this option is disabled, in which case no linting/fixing will occur.",
                     default: true
                 }
             }
@@ -83,7 +96,7 @@ module.exports = {
         sass: {
             type: "object",
             title: "Sass Options",
-            description: "These are directly configurable when running files through the Sass compiler.",
+            order: 7,
             properties: {
                 outputStyle: {
                     type: "string",
