@@ -8,7 +8,7 @@ This plugin was something I developed rather quickly and primarily with my own u
 Motivation to publicize and provide this brief explainer is mostly to make it easier for me when I eventually have to come back to debug something. Perhaps others might find it useful as well though.
 
 ## Recent Changes
-`v1.1.2`
+`v1.1.3` – `v1.1.2`
 - Fix activation error on opening empty workspaces
 
 `v1.1.1`
