@@ -25,7 +25,7 @@ function activate() {
     this.watchers = new CompositeDisposable();
 
     atom.workspace.observeActiveTextEditor(e => {
-        const filePath = ( e ? e.buffer.file.path : null );
+        const filePath = ( e.buffer?.file?.path ?? null );
 
         const ext = path.extname(filePath ?? "/file.null");
         const isSass = ( ext === ".scss" || ext === ".sass" );

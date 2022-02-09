@@ -1,6 +1,12 @@
 # Auto Sass Changelog
 I'll try to keep up with documenting notable changes here in this file.
 
+## 1.1.2
+`February 8, 2022`
+
+### Fixed
+- Fix activation error on opening empty workspace
+
 ## 1.1.1
 `February 8, 2022`
 
