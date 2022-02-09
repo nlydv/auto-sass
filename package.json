@@ -1,6 +1,6 @@
 {
     "name": "auto-sass",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Atom package to manage automatic Sass file compilation and extra things.",
     "keywords": [
         "sass",
@@ -21,7 +21,9 @@
         "url": "https://neelyadav.com/"
     },
     "main": "./index.js",
-    "activationHooks": [ "core:loaded-shell-environment" ],
+    "activationHooks": [
+        "core:loaded-shell-environment"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/nlydv/auto-sass.git"
