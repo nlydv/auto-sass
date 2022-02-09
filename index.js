@@ -13,31 +13,57 @@
  *
  */
 
+const path = require("path");
 const { CompositeDisposable } = require("atom");
-const inspect = require("./lib/inspect");
 const compile = require("./lib/compile");
+const view = require("./lib/view");
 
 /* ————————————————————————————————— */
 
 function activate() {
-    this.subscriptions = new CompositeDisposable();
-    this.subscriptions.add(atom.commands.add("atom-workspace", this.commands));
+    atom.commands.add("atom-workspace", this.commands);
+    this.watchers = new CompositeDisposable();
 
-    atom.workspace.observeTextEditors(e => {
-        this.subscriptions.add(
-            e.onDidSave(saved => {
-                (async () => await compile(saved.path))();
-            })
-        );
+    atom.workspace.observeActiveTextEditor(e => {
+        const filePath = ( e ? e.buffer.file.path : null );
+
+        const ext = path.extname(filePath ?? "/file.null");
+        const isSass = ( ext === ".scss" || ext === ".sass" );
+
+        if ( filePath && isSass ) {
+            const watcher = e.onDidSave(async () => await compile(filePath));
+
+            this.watchers.add(watcher);
+            this.watchers.add(e.onDidDestroy(() => watcher.dispose()));
+        }
+
+        this.activeFile = filePath;
     });
+
+    this.isActivated = true;
+    console.log("activated 'auto-sass'");
 }
 
 function deactivate() {
-    this.subscriptions.dispose();
+    this.watchers.dispose();
+    this.isActivated = false;
 }
 
 module.exports = {
-    activeFile: () => atom.textEditors.getActiveTextEditor().buffer.file.path,
+    activate,
+    deactivate,
+    compile,
+
+    isActivated: null,
+    watchers: null,
+
+    commands: {
+        "auto-sass:compile": async () => {
+            const success = await compile(this.activeFile);
+            if ( success === null ) view.warning("The man behind the curtain refused to compile the currently active file.");
+        }
+    },
+
     config: {
         lint: {
             type: "boolean",
@@ -116,12 +142,5 @@ module.exports = {
                 }
             }
         }
-    },
-    commands: {
-        "auto-sass:compile": async () => await exports.compile(exports.activeFile())
-    },
-    subscriptions: null,
-    activate,
-    deactivate,
-    compile
+    }
 };

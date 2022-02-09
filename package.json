@@ -21,6 +21,7 @@
         "url": "https://neelyadav.com/"
     },
     "main": "./index.js",
+    "activationHooks": [ "core:loaded-shell-environment" ],
     "repository": {
         "type": "git",
         "url": "https://github.com/nlydv/auto-sass.git"
@@ -30,12 +31,10 @@
         "firstline": "^2.0.2",
         "postcss": "^8.4.5",
         "postcss-combine-duplicated-selectors": "^10.0.3",
-        "postcss-less": "^6.0.0",
         "postcss-scss": "^4.0.3",
         "sass": "^1.49.0",
-        "stylelint": "^14.2.0",
-        "stylelint-config-recommended": "^6.0.0",
-        "stylelint-config-standard": "^24.0.0"
+        "stylelint": "^14.4.0",
+        "stylelint-config-standard": "^25.0.0"
     },
     "engines": {
         "atom": ">=1.0.0 <2.0.0"
