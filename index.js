@@ -13,8 +13,8 @@
  *
  */
 
-const path = require("path");
 const { CompositeDisposable } = require("atom");
+const path = require("path");
 const compile = require("./lib/compile");
 const view = require("./lib/view");
 
@@ -58,7 +58,7 @@ module.exports = {
     watchers: null,
 
     commands: {
-        "auto-sass:compile": async () => {
+        "auto-sass:compile": async function () {
             const success = await compile(this.activeFile);
             if ( success === null ) view.warning("The man behind the curtain refused to compile the currently active file.");
         }
@@ -137,7 +137,7 @@ module.exports = {
                 sourceMap: {
                     type: "boolean",
                     title: "Source map",
-                    description: "Whether or not Sass should generate and output a source map",
+                    description: "Whether or not Sass should generate an output a source map",
                     default: false
                 }
             }
