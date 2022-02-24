@@ -66,44 +66,44 @@ module.exports = {
 
     config: {
         lint: {
+            order: 1,
             type: "boolean",
             title: "Stylelint Fix",
             description: "Run the compiled CSS through [Stylelint](https://stylelint.io/) to automatically fix output formatting to match preferred coding syntax/guidelines, where possible.",
-            default: true,
-            order: 1
+            default: true
         },
         prefix: {
+            order: 2,
             type: "boolean",
             title: "Autoprefix",
             description: "Run [Autoprefixer](https://github.com/postcss/autoprefixer) on compiled CSS to apply vendor-specific prefixes for greater cross-browser consistency.",
-            default: true,
-            order: 2
+            default: true
         },
         dedupe: {
+            order: 3,
             type: "boolean",
             title: "Deduplicate",
             description: "Merges multiple exact-match selector blocks into one and deletes repeated property-value pairs in compiled CSS *(use with caution for now)*.",
-            default: false,
-            order: 3
+            default: false
         },
         relativePath: {
+            order: 4,
             type: "string",
             title: "Relative output path",
             description: "Path where all compiled CSS files will be saved by default relative to source Sass file.\nAdd a `$1` in this path where you want to dynamically re-use the name of the source file without its extension.",
-            default: "../$1.css",
-            order: 4
+            default: "../$1.css"
         },
         browserlist: {
+            order: 5,
             type: "string",
             title: "Browserlist query fallback",
             description: "We let Autoprefixer automatically discover a Browserlist config object as either a key within a nearby package.json or dedicated .browserlistrc file. If none are found, and you don't want Autoprefixer to use the default Browserlist query set, you can set a custom Browserlist query here.",
-            default: "",
-            order: 5
+            default: ""
         },
         stylelint: {
+            order: 6,
             type: "object",
             title: "Stylelint Options",
-            order: 6,
             properties: {
                 fallback: {
                     type: "string",
