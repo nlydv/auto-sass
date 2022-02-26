@@ -38,7 +38,11 @@ function activate() {
         const isSass = ( ext === ".scss" || ext === ".sass" );
 
         if ( filePath && isSass ) {
-            const watcher = e.onDidSave(async () => await compile(filePath));
+            const watcher = e.onDidSave(async () => {
+                this.busy.add(`Auto Sass on ${view.projectPath(filePath)}`);
+                await compile(filePath);
+                this.busy.clear();
+            });
 
             this.watchers.add(watcher);
             this.watchers.add(e.onDidDestroy(() => watcher.dispose()));
@@ -51,6 +55,17 @@ function activate() {
     console.log("activated 'auto-sass'");
 }
 
+/* ————— BUSY SIGNAL PROVIDER ——————————————————————————————————————— */
+/* —————————————————————————————————————————————————————————————————— */
+
+function consumeSignal(registry) {
+    this.busy = registry.create();
+    this.watchers.add(this.busy);
+}
+
+/* ————— DEACTIVATE ————————————————————————————————————————————————— */
+/* —————————————————————————————————————————————————————————————————— */
+
 function deactivate() {
     this.watchers.dispose();
     this.isActivated = false;
@@ -59,6 +74,7 @@ function deactivate() {
 module.exports = {
     activate,
     deactivate,
+    consumeSignal,
 
     commands: {
         "auto-sass:compile": async function () {
