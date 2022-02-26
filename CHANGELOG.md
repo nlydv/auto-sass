@@ -1,11 +1,17 @@
 # Auto Sass Changelog
 I'll try to keep up with documenting notable changes here in this file.
 
-## 1.2.1
+## 1.2.3
 `February 26, 2022`
 ### Fixed
 - Patch type error during package loading that blocked activation
 - Isolated specific alert notification only meant for "manual" compilation actions
+
+```
+The Atom.io package registry server has been acting weird and
+not allowing me to publish new versions via the apm CLI... but
+eventually after repeated version bumping it let v1.2.3 go thru
+```
 
 ## 1.2.0
 `February 25, 2022`
