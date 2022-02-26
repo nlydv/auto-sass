@@ -18,10 +18,23 @@ const { CompositeDisposable } = require("atom");
 const compile = require("./lib/compile");
 const view = require("./lib/view");
 
+let busy;
 exports.isActivated = null;
-exports.activeFile = null;
 exports.watchers = null;
-exports.busy = null;
+
+/* ————— THE SAUCE —————————————————————————————————————————————————— */
+/* —————————————————————————————————————————————————————————————————— */
+
+async function execAutoSass(file = null) {
+    file = file ?? atom.workspace.getActiveTextEditor().getPath();
+
+    busy.add(`Auto Sass on ${view.projectPath(file)}`);
+    const status = await compile(file).catch(x => view.error(x.message));
+    busy.clear();
+
+    if ( status === null )
+        view.warning("The man behind the curtain refused to compile the currently active file.");
+}
 
 /* ————— ACTIVATE ——————————————————————————————————————————————————— */
 /* —————————————————————————————————————————————————————————————————— */
@@ -32,23 +45,17 @@ function activate() {
     atom.commands.add("atom-workspace", this.commands);
 
     atom.workspace.observeActiveTextEditor(e => {
-        const filePath = ( e?.buffer?.file?.path ?? null );
+        const filePath = ( e.getPath() ?? null );
 
         const ext = path.extname(filePath ?? `${atom.getConfigDirPath()}/file.null`);
         const isSass = ( ext === ".scss" || ext === ".sass" );
 
         if ( filePath && isSass ) {
-            const watcher = e.onDidSave(async () => {
-                this.busy.add(`Auto Sass on ${view.projectPath(filePath)}`);
-                await compile(filePath);
-                this.busy.clear();
-            });
+            const watcher = e.onDidSave(async () => await execAutoSass(filePath));
 
             this.watchers.add(watcher);
             this.watchers.add(e.onDidDestroy(() => watcher.dispose()));
         }
-
-        this.activeFile = filePath;
     });
 
     this.isActivated = true;
@@ -59,8 +66,8 @@ function activate() {
 /* —————————————————————————————————————————————————————————————————— */
 
 function consumeSignal(registry) {
-    this.busy = registry.create();
-    this.watchers.add(this.busy);
+    busy = registry.create();
+    this.watchers.add(busy);
 }
 
 /* ————— DEACTIVATE ————————————————————————————————————————————————— */
@@ -71,16 +78,15 @@ function deactivate() {
     this.isActivated = false;
 }
 
+/* —————————————————————————————————————————————————————————————————— */
+
 module.exports = {
     activate,
     deactivate,
     consumeSignal,
 
     commands: {
-        "auto-sass:compile": async function () {
-            const success = await compile(this.activeFile);
-            if ( success === null ) view.warning("The man behind the curtain refused to compile the currently active file.");
-        }
+        "auto-sass:compile": async () => await execAutoSass()
     },
 
     config: {
