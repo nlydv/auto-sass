@@ -1,6 +1,12 @@
 # Auto Sass Changelog
 I'll try to keep up with documenting notable changes here in this file.
 
+## 1.2.1
+`February 26, 2022`
+### Fixed
+- Patch type error during package loading that blocked activation
+- Isolated specific alert notification only meant for "manual" compilation actions
+
 ## 1.2.0
 `February 25, 2022`
 ### New

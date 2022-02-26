@@ -25,14 +25,14 @@ exports.watchers = null;
 /* ————— THE SAUCE —————————————————————————————————————————————————— */
 /* —————————————————————————————————————————————————————————————————— */
 
-async function execAutoSass(file = null) {
+async function execAutoSass(file = null, manual = false) {
     file = file ?? atom.workspace.getActiveTextEditor().getPath();
 
     busy.add(`Auto Sass on ${view.projectPath(file)}`);
     const status = await compile(file).catch(x => view.error(x.message));
     busy.clear();
 
-    if ( status === null )
+    if ( ! status && manual )
         view.warning("The man behind the curtain refused to compile the currently active file.");
 }
 
@@ -45,7 +45,7 @@ function activate() {
     atom.commands.add("atom-workspace", this.commands);
 
     atom.workspace.observeActiveTextEditor(e => {
-        const filePath = ( e.getPath() ?? null );
+        const filePath = ( e ? e.getPath() : null );
 
         const ext = path.extname(filePath ?? `${atom.getConfigDirPath()}/file.null`);
         const isSass = ( ext === ".scss" || ext === ".sass" );
@@ -86,7 +86,7 @@ module.exports = {
     consumeSignal,
 
     commands: {
-        "auto-sass:compile": async () => await execAutoSass()
+        "auto-sass:compile": async () => await execAutoSass(null, true)
     },
 
     config: {
