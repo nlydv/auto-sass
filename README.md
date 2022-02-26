@@ -7,9 +7,10 @@ This plugin was something I developed rather quickly and primarily with my own u
 
 Motivation to publicize and provide this brief explainer is mostly to make it easier for me when I eventually have to come back to debug something. Perhaps others might find it useful as well though.
 
-## Recent Changes
-`v1.1.3` – `v1.1.2`
-- Fix activation error on opening empty workspaces
+## Notable [Changes](CHANGELOG.md)
+`v1.2.0`
+- Added [busy-signal](https://github.com/steelbrain/busy-signal) integration
+- Fixed the previously non-responsive manual `auto-sass:compile` command
 
 `v1.1.1`
 - Major speedup on start; from max of 1200ms down to < 5ms (on my machine)
@@ -19,11 +20,14 @@ Motivation to publicize and provide this brief explainer is mostly to make it ea
  - Uses latest [Dart Sass](https://github.com/sass/dart-sass) Node API
  - Lints and fixes compiled CSS with [Stylelint](https://github.com/stylelint/stylelint) using nearest `.stylintrc` config available
  - Runs [Autoprefixer](https://github.com/postcss/autoprefixer) on compiled CSS
- - Deduplicates multiple selector blocks with [postcss-combine-duplicated-selectors](https://github.com/ChristianMurphy/postcss-combine-duplicated-selectors) _(yet to test if this causes other issues)_
+ - Deduplicates multiple selector blocks with [postcss-combine-duplicated-selectors](https://github.com/ChristianMurphy/postcss-combine-duplicated-selectors)
+     - (_yet to test if this has unintended results, off by default_)
  - Does all the above before actually saving the output to file
  - Makes it easier and quicker to live test a site as you build
 
-## Install
+## Usage
+
+### Install
 
 Search for `auto-sass` and install from Atom's in-app settings UI
 
@@ -32,7 +36,7 @@ Or, if you prefer via CLI:
 apm install auto-sass
 ```
 
-## Usage
+### Settings
 
 In the package settings UI, you can turn on/off any of the three additional post-compilation tasks:
 * linting
@@ -105,8 +109,12 @@ Not sure what the trend/long-term outlook is with Atom, I've found a lot of wide
 
 I hope future me doesn't pull his hair out trying to squash a bug that's out of his control.
 
+Why does Stylelint seemingly only do caching if exec directly via CLI and ignore `cache: true` opt via node API?
+
+Twitter: [@nlydv](https://twitter.com/nlydv)
+
 ## License
 
 Copyright © 2022 [Neel Yadav](https://neelyadav.com)
 
-_This project is licensed under the terms of the MIT License._<br>_Full license text is available in the [LICENSE.txt](https://github.com/nlydv/auto-sass/blob/master/LICENSE.txt) file._
+_This project is licensed under the terms of the MIT License._ <br>_Full license text is available in the [LICENSE.txt](https://github.com/nlydv/auto-sass/blob/master/LICENSE.txt) file._
