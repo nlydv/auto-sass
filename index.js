@@ -13,21 +13,28 @@
  *
  */
 
-const { CompositeDisposable } = require("atom");
 const path = require("path");
+const { CompositeDisposable } = require("atom");
 const compile = require("./lib/compile");
 const view = require("./lib/view");
 
-/* ————————————————————————————————— */
+exports.isActivated = null;
+exports.activeFile = null;
+exports.watchers = null;
+exports.busy = null;
+
+/* ————— ACTIVATE ——————————————————————————————————————————————————— */
+/* —————————————————————————————————————————————————————————————————— */
 
 function activate() {
-    atom.commands.add("atom-workspace", this.commands);
     this.watchers = new CompositeDisposable();
+
+    atom.commands.add("atom-workspace", this.commands);
 
     atom.workspace.observeActiveTextEditor(e => {
         const filePath = ( e?.buffer?.file?.path ?? null );
 
-        const ext = path.extname(filePath ?? "/file.null");
+        const ext = path.extname(filePath ?? `${atom.getConfigDirPath()}/file.null`);
         const isSass = ( ext === ".scss" || ext === ".sass" );
 
         if ( filePath && isSass ) {
@@ -52,10 +59,6 @@ function deactivate() {
 module.exports = {
     activate,
     deactivate,
-    compile,
-
-    isActivated: null,
-    watchers: null,
 
     commands: {
         "auto-sass:compile": async function () {
